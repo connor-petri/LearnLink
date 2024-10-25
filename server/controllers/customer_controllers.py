@@ -10,7 +10,8 @@ def register_customer(data):
     first_name = data.get('first_name')
     last_name = data.get('last_name')
 
-    customer = Customer(email=email, password=password, first_name=first_name, last_name=last_name)
+    customer = Customer(email=email, password=password, first_name=first_name, last_name=last_name, 
+                        outstanding_balance=0.0)
     db.session.add(customer)
     db.session.commit()
 
@@ -25,4 +26,5 @@ def login_customer(data):
     if customer is None or not customer.check_password(password):
         return jsonify({'message': 'Invalid credentials'}), 401
 
-    return jsonify({'message': 'Customer logged in successfully'}), 200
+    return jsonify({'message': 'Customer logged in successfully',
+                    "login_type": "customer"}), 200
