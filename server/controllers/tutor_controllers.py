@@ -4,12 +4,13 @@ from flask_login import login_user
 
 from app import app
 from models.tutor_models import *
+from models.customer_models import Customer
 
 
 def register_tutor(data):
     email = data.get('email')
 
-    if Tutor.query.filter_by(email=email).first():
+    if Tutor.query.filter_by(email=email).first() or Customer.query.filter_by(email=email).first():
         return jsonify({'message': 'Email already exists'}), 400
     
     try:
@@ -44,5 +45,4 @@ def login_tutor(data):
         return jsonify({'message': 'Invalid credentials'}), 401
 
     login_user(tutor)
-    session['account_type'] = 'tutor'
     return jsonify({'message': 'Tutor logged in successfully'}), 200

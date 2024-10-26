@@ -1,15 +1,16 @@
-from flask import jsonify, session
+from flask import jsonify, session, make_response
 from flask_bcrypt import generate_password_hash, check_password_hash
 from flask_login import login_user
 
 from app import app
 from models.customer_models import *
+from models.tutor_models import Tutor
 
 
 def register_customer(data):
     email = data.get('email')
 
-    if not Customer.query.filter_by(email=email).first():
+    if Customer.query.filter_by(email=email).first() or Tutor.query.filter_by(email=email).first():
         return jsonify({'message': 'Email already exists'}), 400
 
     try:

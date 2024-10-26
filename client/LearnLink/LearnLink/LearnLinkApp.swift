@@ -17,9 +17,10 @@ struct Appdata {
 
 @main
 struct LearnLinkApp: App {
+    
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            CustomerLogin()
         }
     }
 }
