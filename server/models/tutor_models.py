@@ -15,7 +15,7 @@ class Tutor(db.Model, UserMixin):
     hourly_rate = db.Column(db.Float, nullable=False)
     outstanding_pay = db.Column(db.Float, nullable=False, default=0.0)
 
-    subjects = db.relationship('subject', backref=__tablename__)
+    subjects = db.relationship('Subject', backref=__tablename__)
 
 
 
