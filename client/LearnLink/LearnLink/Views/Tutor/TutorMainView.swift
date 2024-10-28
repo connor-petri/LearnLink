@@ -9,7 +9,16 @@ import SwiftUI
 
 struct TutorMainView: View {
     var body: some View {
-        Text("TutorMainView")
+        TabView {
+            Tab("Dashboard", systemImage: "square.grid.2x2") { }
+            
+            Tab("Appointments", systemImage: "calendar") { }
+            
+            Tab("Account", systemImage: "person.circle") {
+                TutorAccountView()
+            }
+        }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

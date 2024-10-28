@@ -15,7 +15,9 @@ struct CustomerMainView: View {
             
             Tab("Appointments", systemImage: "calendar") { }
             
-            Tab("Account", systemImage: "person.circle") { }
+            Tab("Account", systemImage: "person.circle") {
+                CustomerAccountView()
+            }
         }
         .navigationBarBackButtonHidden(true)
     }

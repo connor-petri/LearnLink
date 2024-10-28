@@ -3,6 +3,7 @@ from flask_login import logout_user
 
 from app import app
 from controllers.customer_controllers import *
+from controllers.user_loader import *
 
 
 # call keys -> email: str, password: str, first_name: str, last_name: str

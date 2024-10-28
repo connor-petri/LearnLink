@@ -51,6 +51,7 @@ def login_tutor(data):
         return jsonify({'message': 'Invalid credentials'}), 401
 
     login_user(tutor)
+    session['account_type'] = 'tutor'
     return jsonify({'message': 'Tutor logged in successfully',
                     'id': tutor.id,
                     'email': tutor.email,

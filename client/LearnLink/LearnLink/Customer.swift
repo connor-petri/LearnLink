@@ -133,26 +133,36 @@ class Customer {
             return
         }
         
-        let url = URL(string: Appdata.shared.serverURL + "/customer/logout")
-        let request = URLRequest(url: url!)
-        let uploadTask = URLSession.shared.uploadTask(with: request, from: nil) { (data, response, error) in
-            if let error {
-                print("Error: \(error)")
-                return
-            }
+        do {
+            let url = URL(string: Appdata.shared.serverURL + "/customer/logout")
+            var request = URLRequest(url: url!)
+            request.httpMethod = "POST"
+            let jsonData = try JSONEncoder().encode(["":""])
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             
-            if let httpResponse = response as? HTTPURLResponse {
-                if httpResponse.statusCode == 200 {
-                    print("Logout successful")
-                    self.isLoggedIn = false
-                    self.id = -1
-                    self.email = ""
-                    self.firstName = ""
-                    self.lastName = ""
+            let uploadTask = URLSession.shared.uploadTask(with: request, from: jsonData) { (data, response, error) in
+                if let error {
+                    print("Error: \(error)")
+                    return
+                }
+                
+                if let httpResponse = response as? HTTPURLResponse {
+                    if httpResponse.statusCode == 200 {
+                        print("Logout successful")
+                        self.isLoggedIn = false
+                        self.id = -1
+                        self.email = ""
+                        self.firstName = ""
+                        self.lastName = ""
+                        
+                        Appdata.shared.path.removeLast()
+                    }
                 }
             }
+            
+            uploadTask.resume()
+        } catch {
+            print("Error: \(error)")
         }
-        
-        uploadTask.resume()
     }
 }
