@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct CustomerAccountView: View {
     @State var customer: Customer = .shared
     @State var isLoggingOut: Bool = false
