@@ -60,28 +60,23 @@ struct CustomerLoginView: View {
                 }
             }
             .navigationDestination(for: String.self) { view in
-                if view == "CustomerMainView" {
+                switch view {
+                case "CustomerMainView":
                     CustomerMainView()
-                }
-                
-                if view == "CustomerRegisterView" {
+                case "CustomerRegisterView":
                     CustomerRegisterView()
-                }
-                
-                if view == "CustomerLoginView" {
+                case "CustomerLoginView":
                     CustomerLoginView()
-                }
-                
-                if view == "TutorLoginView" {
+                case "CustomerAddStudentView":
+                    CustomerAddStudentView()
+                case "TutorLoginView":
                     TutorLoginView()
-                }
-                
-                if view == "TutorRegisterView" {
+                case "TutorRegisterView":
                     TutorRegisterView()
-                }
-                
-                if view == "TutorMainView" {
+                case "TutorMainView":
                     TutorMainView()
+                default:
+                    CustomerLoginView()
                 }
             }
         }

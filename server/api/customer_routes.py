@@ -36,7 +36,7 @@ def logout_customer_route():
 @app.route('/customer/add_student', methods=['POST'])
 def add_student_route():
     data = request.get_json()
-    add_student(data)
+    return add_student(data)
 
 
 # TODO: Test this route

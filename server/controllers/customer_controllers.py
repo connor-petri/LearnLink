@@ -1,6 +1,7 @@
 from flask import jsonify, session, make_response
 from flask_bcrypt import generate_password_hash, check_password_hash
 from flask_login import login_user, current_user, login_required
+from datetime import datetime
 
 from app import app
 from models.customer_models import *
@@ -53,7 +54,7 @@ def add_student(data):
 
     first_name = data.get('first_name')
     last_name = data.get('last_name')
-    date_of_birth = data.get('date_of_birth')
+    date_of_birth = datetime.fromtimestamp(data.get('date_of_birth'))
     health_information = data.get('health_information')
 
     if Student.query.filter_by(customer_id=customer.id, first_name=first_name, last_name=last_name).first():
@@ -75,6 +76,9 @@ def add_student(data):
 @login_required
 def get_students():
     customer = Customer.query.get(current_user.id)
+    if not customer:
+        return jsonify({'message': 'Customer not found'}), 404
+    
     students = customer.students
 
     students_list = []
@@ -87,7 +91,7 @@ def get_students():
             'health_information': student.health_information
         })
 
-    return jsonify({'students': students_list})
+    return jsonify({'students': students_list}), 200
         
 
 @login_required

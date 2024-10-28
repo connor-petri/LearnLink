@@ -123,6 +123,7 @@ class Customer {
                 }
             }
             uploadTask.resume()
+            _ = try await self.getStudents()
             
         } catch {
             print("Error: \(error)")
@@ -228,6 +229,7 @@ class Customer {
                 if let httpResponse = response as? HTTPURLResponse {
                     if httpResponse.statusCode == 201 {
                         print("Added student " + firstName + " " + lastName + " to customer " + self.email)
+                        Appdata.shared.path.removeLast()
                     }
                 }
             }
@@ -266,6 +268,8 @@ class Customer {
                     }
                 }
             }
+            
+            uploadTask.resume()
             
         } catch {
             print("Error: \(error)")
