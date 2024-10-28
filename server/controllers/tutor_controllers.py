@@ -25,16 +25,22 @@ def register_tutor(data):
         db.session.add(tutor)
         db.session.commit()
 
+    except Exception as e:
+        app.logger.error(e)
+        db.session.rollback()
+        return jsonify({'message': 'An error occurred while registering the tutor'}), 500
+    
+    try: 
         subject = Subject(name=subject, tutor_id=tutor.id)
         db.session.add(subject)
         db.session.commit()
 
         return jsonify({'message': 'Tutor registered successfully'}), 201
-
+    
     except Exception as e:
         app.logger.error(e)
         db.session.rollback()
-        return jsonify({'message': 'An error occurred while registering the tutor'}), 500
+        return jsonify({'message': 'An error occurred while adding a subject to the registered tutor'}), 500
     
 
 def login_tutor(data):
@@ -45,4 +51,8 @@ def login_tutor(data):
         return jsonify({'message': 'Invalid credentials'}), 401
 
     login_user(tutor)
-    return jsonify({'message': 'Tutor logged in successfully'}), 200
+    return jsonify({'message': 'Tutor logged in successfully',
+                    'id': tutor.id,
+                    'email': tutor.email,
+                    'first_name': tutor.first_name,
+                    'last_name': tutor.last_name}), 200

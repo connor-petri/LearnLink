@@ -8,10 +8,11 @@
 import SwiftUI
 
 
-struct Appdata {
+class Appdata: ObservableObject {
     static let shared = Appdata()
     
     let serverURL: String = "http://127.0.0.1:5000" // FIXME change when server is deployed.
+    @Published var path: NavigationPath = NavigationPath()
 }
 
 
@@ -20,7 +21,7 @@ struct LearnLinkApp: App {
     
     var body: some Scene {
         WindowGroup {
-            CustomerLogin()
+            CustomerLoginView()
         }
     }
 }
