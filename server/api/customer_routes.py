@@ -1,5 +1,5 @@
 from app import api
-from resources.customer_resources import *
+from resources.customer.account import *
 
 
 # call keys -> email: str, password: str, first_name: str, last_name: str

@@ -1,5 +1,5 @@
 from app import api
-from resources.tutor_resources import *
+from resources.tutor.account import *
 
 
 # call keys -> email: str, password: str, first_name: str, last_name: str, hourly_rate: float, primary_subject: str

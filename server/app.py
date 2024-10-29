@@ -17,8 +17,3 @@ app.config['JWT_SECRET_KEY'] = getenv("JWT_SECRET_KEY")
 db = SQLAlchemy(app)
 api = Api(app)
 jwt = JWTManager(app)
-
-#FIXME: Remove when not needed anymore
-from flask_login import LoginManager
-login_manager = LoginManager()
-login_manager.init_app(app)
