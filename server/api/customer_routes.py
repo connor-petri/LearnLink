@@ -4,15 +4,12 @@ from flask_login import logout_user
 from app import app, api
 from controllers.customer_controllers import *
 from controllers.user_loader import *
-from resources.customer_resources import CustomerLogin
+from resources.customer_resources import *
 
 
 # call keys -> email: str, password: str, first_name: str, last_name: str
 # return keys -> message: str
-@app.route('/customer/register', methods=['POST'])
-def register_customer_route():
-    data = request.get_json()
-    return register_customer(data)
+api.add_resource(CustomerRegister, '/customer/register')
 
 
 # call keys -> email: str, password: str

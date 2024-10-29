@@ -55,7 +55,7 @@ class Customer {
             let jsonData = try JSONEncoder().encode(CustomerRegisterRequest(email, password, firstName, lastName))
             
             var request = URLRequest(url: url!)
-            request.httpMethod = "POST"
+            request.httpMethod = "PUT"
             request.httpBody = jsonData
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             
