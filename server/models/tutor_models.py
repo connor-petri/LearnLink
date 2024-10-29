@@ -1,8 +1,7 @@
 from app import db
-from flask_login import UserMixin
 
 
-class Tutor(db.Model, UserMixin):
+class Tutor(db.Model):
     __tablename__ = 'tutors'
 
     id = db.Column(db.Integer, primary_key=True)

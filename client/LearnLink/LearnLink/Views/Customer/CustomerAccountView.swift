@@ -80,7 +80,7 @@ struct CustomerAccountView: View {
             Button(action: {
                 isLoggingOut = true
                 Task {
-                    await customer.logout()
+                    // Log out logic here
                     isLoggingOut = false
                 }
             }) {

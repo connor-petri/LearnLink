@@ -57,7 +57,7 @@ class Tutor {
             let jsonData = try JSONEncoder().encode(TutorRegisterRequest(email, password, firstName, lastName, String(describing: subject)))
             
             var request = URLRequest(url: url!)
-            request.httpMethod = "POST"
+            request.httpMethod = "PUT"
             request.httpBody = jsonData
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             
@@ -131,43 +131,5 @@ class Tutor {
             print("Error: \(error)")
         }
     }
-    
-    
-    func logout() async {
-        if !self.isLoggedIn {
-            return
-        }
-        
-        do {
-            let url = URL(string: Appdata.shared.serverURL + "/tutor/logout")
-            var request = URLRequest(url: url!)
-            request.httpMethod = "POST"
-            let jsonData = try JSONEncoder().encode(["":""])
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            
-            let uploadTask = URLSession.shared.uploadTask(with: request, from: jsonData) { (data, response, error) in
-                if let error {
-                    print("Error: \(error)")
-                    return
-                }
-                
-                if let httpResponse = response as? HTTPURLResponse {
-                    if httpResponse.statusCode == 200 {
-                        print("Logout successful")
-                        self.isLoggedIn = false
-                        self.id = -1
-                        self.email = ""
-                        self.firstName = ""
-                        self.lastName = ""
-                        
-                        Appdata.shared.path.removeLast()
-                    }
-                }
-            }
-            
-            uploadTask.resume()
-        } catch {
-            print("Error: \(error)")
-        }
-    }
+
 }

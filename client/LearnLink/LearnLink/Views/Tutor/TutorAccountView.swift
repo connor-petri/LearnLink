@@ -16,7 +16,7 @@ struct TutorAccountView: View {
             Button(action: {
                 isLoggingOut = true
                 Task {
-                    await tutor.logout()
+                    // log out logic here
                     isLoggingOut = false
                 }
             }) {
