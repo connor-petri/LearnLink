@@ -75,21 +75,14 @@ def add_student(data):
 
 @login_required
 def get_students():
-    customer = Customer.query.get(current_user.id)
-    if not customer:
-        return jsonify({'message': 'Customer not found'}), 404
+    students = Student.query.filter_by(customer_id=current_user.id).all()
+    if not students:
+        return jsonify({'message': 'No students found'}), 404
     
-    students = customer.students
-
     students_list = []
     for student in students:
-        students_list.append({
-            'id': student.id,
-            'first_name': student.first_name,
-            'last_name': student.last_name,
-            'date_of_birth': student.date_of_birth,
-            'health_information': student.health_information
-        })
+        students_list.append({'id': student.id, 'first_name': student.first_name, 'last_name': student.last_name, 
+                              'date_of_birth': student.date_of_birth, 'health_information': student.health_information})
 
     return jsonify({'students': students_list}), 200
         
