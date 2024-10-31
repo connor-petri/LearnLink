@@ -6,7 +6,7 @@ from flask_jwt_extended import create_access_token, jwt_required
 from models.tutor_models import *
 
 
-class TutorRegister(Resource):
+class TutorRegisterResource(Resource):
     def put(self):
         try:
             data = request.get_json()
@@ -37,7 +37,7 @@ class TutorRegister(Resource):
             return {"message": f"Error: {e}"}, 500
         
 
-class TutorLogin(Resource):
+class TutorLoginResource(Resource):
     def post(self):
         try:
             data = request.get_json()

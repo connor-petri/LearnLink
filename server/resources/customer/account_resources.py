@@ -6,7 +6,7 @@ from flask_jwt_extended import create_access_token, jwt_required
 from models.customer_models import *
 
 
-class CustomerRegister(Resource):
+class CustomerRegisterResource(Resource):
     def put(self):
         try:
             data = request.get_json()
@@ -50,7 +50,7 @@ class CustomerRegister(Resource):
             return {"message": f"Error: {e}"}, 500
 
 
-class CustomerLogin(Resource):
+class CustomerLoginResource(Resource):
     def post(self):
         try:
             data = request.get_json()
